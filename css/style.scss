@@ -1,0 +1,389 @@
+@font-face {
+	font-family: "CeraRound Pro";
+	src: url(../fonts/CeraRoundPro-Regular.woff2) format("woff2");
+	font-weight: 400;
+	font-style: normal;
+	font-display: swap;
+}
+@font-face {
+	font-family: "CeraRound Pro";
+	src: url(../fonts/CeraRoundPro-Medium.woff2) format("woff2");
+	font-weight: 500;
+	font-style: normal;
+	font-display: swap;
+}
+@font-face {
+	font-family: "CeraRound Pro";
+	src: url(../fonts/CeraRoundPro-Bold.woff2) format("woff2");
+	font-weight: 600;
+	font-style: normal;
+	font-display: swap;
+}
+
+* {
+	font-family: "Rubik", sans-serif;
+	// font-family: "CeraRound Pro", sans-serif;
+	font-size: 16px;
+	
+}
+
+a {
+	text-decoration: none;
+	svg {
+		outline: none;
+	}
+}
+
+.header {
+	&__wrapper {
+		display: flex;
+		justify-content: space-between;
+		padding: 10px 0;
+	}
+
+	&__logo {
+		display: flex;
+		align-items: center;
+		text-decoration: none;
+	}
+
+	&__logo-icon {
+		width: 36px;
+		margin-right: 5px;
+
+		svg {
+			width: 100%;
+			object-fit: contain;
+		}
+	}
+
+	&__logo-title {
+		font-weight: 600;
+	}
+
+	&__logo-wrapper {
+		position: relative;
+	}
+
+	&__logo-new {
+		position: absolute;
+		top: 0;
+		right: -5px;
+	}
+
+	&__action {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+	}
+
+	&__menu-item {
+		.nav-link {
+			padding-left: 0;
+			padding-right: 0;
+			color: #212529;
+		}
+	}
+}
+
+.block {
+	padding: 20px 0;
+
+	&__search {
+		max-width: 600px;
+		margin: 0 auto;
+	}
+}
+
+.search-form {
+	&__input {
+		display: flex;
+
+		.form-control {
+			margin-right: 10px;
+		}
+
+		&--phonedata {
+			.btn-secondary {
+				margin-right: 10px;
+			}
+			// color: #fffb00;
+		}
+	}
+
+	&__radio {
+		display: flex;
+		justify-content: space-between;
+		margin-top: 10px;
+	}
+
+	&__radio-item {
+		.form-check-input {
+			margin-right: 5px;
+		}
+	}
+}
+
+.table {
+	&__hovered {
+		tbody {
+			tr {
+				&:hover {
+					background-color: rgba(#0d6efd, 0.3);
+				}
+			}
+		}
+	}
+
+	&__thead {
+		&--primary {
+			tr {
+				background-color: #0d6efd;
+				color: #fff;
+			}
+		}
+	}
+}
+
+.user {
+	&__wrapper {
+		display: flex;
+	}
+
+	&__menu {
+		.nav-link {
+			padding-left: 0;
+			padding-right: 0;
+			color: #212529;
+		}
+	}
+
+	&__link {
+		display: flex;
+		align-items: center;
+		margin-right: 10px;
+
+		svg {
+			width: 18px;
+			margin-right: 5px;
+		}
+	}
+}
+
+.error {
+	&__message {
+		font-weight: 600;
+		font-size: 24px;
+
+		&--with-icon {
+			display: flex;
+			align-items: center;
+			gap: 5px;
+
+			i,
+			span {
+				font-size: 24px;
+			}
+
+			i {
+				color: #f00;
+			}
+		}
+	}
+}
+
+.client {
+	&__head {
+		display: flex;
+		justify-content: space-between;
+	}
+
+	&__action {
+		display: flex;
+		gap: 10px;
+	}
+
+	&__head-row {
+		h5 {
+			font-weight: 600;
+			margin: 0;
+		}
+
+		&--primary {
+			padding: 10px 0;
+			background-color: #0d6efd;
+			color: #fff;
+			border-bottom: 2px solid blue;
+		}
+
+		&--history {
+			h5 {
+				font-size: 18px;
+			}
+		}
+	}
+
+	&__row {
+		margin-bottom: 20px;
+
+		.row {
+			padding: 5px 0;
+			border-bottom: 1px solid rgba(#212529, 0.1);
+
+			&:nth-of-type(odd) {
+				background-color: rgba(#212529, 0.05);
+			}
+
+			&:hover {
+				background-color: rgba(#0d6efd, 0.3);
+			}
+		}
+	}
+
+	&__row-title {
+		display: flex;
+		align-items: center;
+		font-weight: 500;
+	}
+
+	&__row-data {
+		display: flex;
+		align-items: center;
+
+		&--login {
+			// overflow-wrap: break-word;
+			word-break: break-all;
+		}
+	}
+
+	&__history-col {
+		display: flex;
+		align-items: center;
+
+		// &--type {
+		// 	color: #f00;
+
+		// 	i {
+		// 		font-size: 24px;
+		// 	}
+		// }
+
+		&--linedata {
+			i {
+				margin-right: 5px;
+				margin-left: 5px;
+			}
+		}
+	}
+}
+
+.modal-body {
+	.col-form-label {
+		line-height: normal;
+	}
+}
+
+option {
+	&:disabled {
+		color: rgba(#000, 0.2);
+	}
+}
+
+.row-stripped {
+	border-bottom: 1px solid rgba(#212529, 0.1);
+
+	&:nth-of-type(even) {
+		background-color: rgba(#212529, 0.05);
+	}
+
+	&:hover {
+		background-color: rgba(#0d6efd, 0.3);
+	}
+}
+
+.head-title {
+	&--primary {
+		font-weight: 600;
+		font-size: 18px;
+	}
+}
+
+.bg-teal {
+	&-100 {
+		background-color: #d2f4ea !important;
+	}
+	&-200 {
+		background-color: #a6e9d5 !important;
+	}
+	&-300 {
+		background-color: #79dfc1 !important;
+	}
+}
+
+.bg {
+	&-screaming-green {
+		background-color: #3eff3d !important;
+	}
+}
+
+// datepicker
+.ui-datepicker-month,
+.ui-datepicker-year {
+	display: block;
+	width: 100%;
+	padding: 0.375rem 2.25rem 0.375rem 0.75rem;
+	font-size: 1rem;
+	font-weight: 400;
+	line-height: 1.5;
+	color: #212529;
+	background-color: #fff;
+	background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+	background-repeat: no-repeat;
+	background-position: right 0.75rem center;
+	background-size: 16px 12px;
+	border: 1px solid #ced4da;
+	border-radius: 0.25rem;
+	transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+	appearance: none;
+	flex-shrink: 0;
+}
+
+.ui-datepicker-title {
+	display: flex;
+	justify-content: space-between;
+}
+
+.ui-state-default {
+	border-radius: 0.25rem;
+}
+
+.ui-datepicker {
+	border-radius: 0.25rem;
+
+	.ui-datepicker-next,
+	.ui-datepicker-prev {
+		top: 10px;
+	}
+}
+
+.blink-danger {
+	animation: blinkDanger 1.2s infinite;
+}
+
+@keyframes blinkDanger {
+	0% {
+		color: #dc3545;
+	}
+	49% {
+		color: #dc3545;
+	}
+	60% {
+		color: transparent;
+	}
+	99% {
+		color: transparent;
+	}
+	100% {
+		color: #dc3545;
+	}
+}
