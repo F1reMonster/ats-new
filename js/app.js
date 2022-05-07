@@ -90,6 +90,7 @@ $(document).ready(function () {
 		);
 	});
 
+	// new gpon
 	$("#newSelectGpon").change(function () {
 		console.log("change gpon");
 		$.post(
@@ -97,6 +98,18 @@ $(document).ready(function () {
 			{ id: $("#newSelectGpon").val() },
 			function (res) {
 				$("#newGponPort").html(res);
+			}
+		);
+	});
+
+	// edit gpon
+	$("#editSelectGpon").change(function () {
+		console.log("change gpon");
+		$.post(
+			"select_gpon_port.php",
+			{ id: $("#editSelectGpon").val() },
+			function (res) {
+				$("#editGponPort").html(res);
 			}
 		);
 	});

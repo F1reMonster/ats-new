@@ -206,6 +206,7 @@ function saltGenerator($n = 3)
 					`note` = '" . $_POST['note'] . "',
 					`ppp_password` = '" . $_POST['ppp_password'] . "',
 					`id_dslam` = '" . $_POST['id_dslam'] . "',
+					`id_gpon` = '" . $_POST['id_gpon'] . "',
 					`cross_data` = '" . $_POST['cross_data'] . "',
 					`port_number` = '" . $edit_port . "',
 					`date_phone` = '" . $datephone . "',

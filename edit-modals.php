@@ -32,7 +32,7 @@ if ($_COOKIE['user_id']) {
 						}
 						?>
 						<h5 class="modal-title me-2">Редагування ТЗ:&nbsp;<?= $line['phone'] ?></h5>
-						
+
 						<?php
 
 						//if ($line['status'] == 1) { 
@@ -435,6 +435,7 @@ if ($_COOKIE['user_id']) {
 
 
 						<div class="tab-content ">
+							<!--  adsl tab -->
 							<div class="tab-pane fade <?= $tab_adsl_active ?>" id="tabAdslEdit" role="tabpanel" aria-labelledby="adsledit-tab">
 								<!-- adsl plates & ports -->
 								<div class="row my-2">
@@ -458,7 +459,11 @@ if ($_COOKIE['user_id']) {
 													while ($row = mysqli_fetch_array($d)) {
 
 
-														if ($line["id_dslam"] == $row["id"]) {	$s = "selected=\"selected\"";	} else {	$s = ""; }
+														if ($line["id_dslam"] == $row["id"]) {
+															$s = "selected=\"selected\"";
+														} else {
+															$s = "";
+														}
 														print "<option $s value=$row[id]>$row[nomer_dslam]&nbsp;>&nbsp;$row[name_dslam]&nbsp;|&nbsp;$row[cross_name]</option>\n";
 													}
 													?>
@@ -472,7 +477,7 @@ if ($_COOKIE['user_id']) {
 												<label for="port" class="col-form-label">Номер порта:</label>
 											</div>
 											<div class="col-3">
-											
+
 												<select id="port" name="edit_port_adsl" class="form-select" <?= $disable_select ?>>
 													<option value=""></option>
 													<?php
@@ -547,6 +552,7 @@ if ($_COOKIE['user_id']) {
 								<!-- ./type connections adsl,vpn, etc -->
 							</div>
 
+							<!-- gon tab -->
 							<div class="tab-pane fade <?= $tab_gpon_active ?>" id="tabGponEdit" role="tabpanel" aria-labelledby="gponedit-tab">
 								<div class="row my-2">
 									<div class="col-sm-8">
@@ -588,7 +594,7 @@ if ($_COOKIE['user_id']) {
 												<label for="editGponPort" class="col-form-label">Номер порта:</label>
 											</div>
 											<div class="col-3">
-												<select id="editGponPort" name="edit_port_gpon" class="form-select">
+												<select id="editGponPort" name="edit_port_gpon" class="form-select" <?= $disable_select ?>>
 													<option value=""></option>
 													<?php
 													for ($i = 1; $i <= $line["gpon_slitter_ports"]; $i++) {
