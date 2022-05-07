@@ -122,7 +122,7 @@ require_once('head.php');
 
 						if ($line["id_gpon"]) {
 
-							print "<th scope=\"row\"><div class=\"text-break text-wrap\" style=\"width: 150px;\">" . $line['phone'] . "</div></th>";
+							print "<th scope=\"row\"><div class=\"text-break text-wrap\" style=\"width: 150px; font-size: 14px;\">" . $line['phone'] . "</div></th>";
 						} else {
 							print "<th scope=\"row\">" . $line['phone'] . "</th>";
 
