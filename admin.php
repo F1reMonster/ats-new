@@ -80,9 +80,15 @@ function saltGenerator($n = 3)
 				$nomer_doma = (int)$_POST['new_nomer_bud'];
 				$kv = (int)$_POST['new_nomer_kv'];
 
-				if ($_POST['new_port_adsl']) {$new_port = $_POST['new_port_adsl'];}
-				if ($_POST['new_port_gpon']) {$new_port = $_POST['new_port_gpon'];}
-				if ($_POST['new_port_fttb']) {$new_port = $_POST['new_port_fttb'];}
+				if ($_POST['new_port_adsl']) {
+					$new_port = $_POST['new_port_adsl'];
+				}
+				if ($_POST['new_port_gpon']) {
+					$new_port = $_POST['new_port_gpon'];
+				}
+				if ($_POST['new_port_fttb']) {
+					$new_port = $_POST['new_port_fttb'];
+				}
 
 				mysqli_query(
 					$connect,
@@ -186,9 +192,15 @@ function saltGenerator($n = 3)
 				$id_ul = (int)$_POST['id_ul'];
 				$nomer_doma = (int)$_POST['nomer_bud'];
 				$kv = (int)$_POST['kv'];
-				if ($_POST['edit_port_adsl']) {$edit_port = $_POST['edit_port_adsl'];}
-				if ($_POST['edit_port_gpon']) {$edit_port = $_POST['edit_port_gpon'];}
-				if ($_POST['edit_port_fttb']) {$edit_port = $_POST['edit_port_fttb'];}
+				if ($_POST['edit_port_adsl']) {
+					$edit_port = $_POST['edit_port_adsl'];
+				}
+				if ($_POST['edit_port_gpon']) {
+					$edit_port = $_POST['edit_port_gpon'];
+				}
+				if ($_POST['edit_port_fttb']) {
+					$edit_port = $_POST['edit_port_fttb'];
+				}
 
 				mysqli_query($connect, "UPDATE db_ats SET
 					`phone` = '" . $_POST['phone'] . "',
@@ -256,21 +268,33 @@ function saltGenerator($n = 3)
 
 				/**/
 				$datenow = strtotime(date("d.m.Y", time()));
-				$query = mysqli_query($connect, "SELECT *, d.id as id_ats
-						FROM db_ats d
-						LEFT JOIN name_dslam ON name_dslam.id = d.id_dslam
-						LEFT JOIN street ON id_ul = street.id
-						LEFT JOIN np ON id_np = np.id
-						WHERE d.id = $id");
+				$query = mysqli_query($connect, "SELECT *, d.id as id_ats, n.np_name as gpon_np, s.street_name as gpon_street, street.street_name as cli_street, np.np_name as cli_np
+				FROM db_ats d
+				LEFT JOIN name_dslam ON name_dslam.id = d.id_dslam
+				LEFT JOIN street ON street.id = id_ul
+				LEFT JOIN np ON np.id = id_np
+				LEFT JOIN gpon ON gpon.id = id_gpon
+				LEFT JOIN np n ON n.id = id_gpon_np
+				LEFT JOIN street s ON s.id = id_gpon_street
+				WHERE d.id = $id");
+
 				$row = mysqli_fetch_assoc($query);
 
 
 				$access = mysqli_fetch_assoc(mysqli_query($connect, "SELECT `user_name` FROM users WHERE id = '$userid'"));
 
-				if ($row["name_dslam"]) {
+				if ($row["id_dslam"]) {
 					$int = "крос: $row[cross_data]<br>плата: $row[name_dslam]<br>порт:$row[port_number]";
-				} else {
-					$int = '';
+				} 
+
+				if ($row["id_gpon"]) {
+					if ($row["gpon_building_korpus"]) {
+						$gpon_building = $row["gpon_building_number"] . "/" . $row["gpon_building_korpus"];
+					} else {
+						$gpon_building = $row["gpon_building_number"];
+					}
+					$int = "локація: $row[gpon_location]<br>сплітер: $row[gpon_splitter]<br>порт на сплітері: $row[port_number]<br>адреса сплітера: $row[gpon_np], $row[gpon_street], $gpon_building";
+					$row["line_data"] = "port id: ".$row["line_data"];
 				}
 
 				// $adress = $row["np_name"] . ", " . $row["street_name"] . " б." . $row["nomer_doma"] . "/" . $row["korpus"] . " кв." . $row["kv"];
@@ -325,6 +349,8 @@ function saltGenerator($n = 3)
 					`type_connection` = '',
 					`ppp_password` = '',
 					`id_dslam` = '',
+					`id_gpon` = '',
+					`id_fttb` = '',
 					`cross_data` = '',
 					`port_number` = '',
 					`date_phone` = '',
@@ -344,18 +370,18 @@ function saltGenerator($n = 3)
 
 			// remove internet
 			if ($mode == 6) {
-				// echo "id=" . $id;
-				// echo "userid=" . $userid;
-
-
-				/**/
 				$datenow = strtotime(date("d.m.Y", time()));
-				$query = mysqli_query($connect, "SELECT *, d.id as id_ats
-						FROM db_ats d
-						LEFT JOIN name_dslam ON name_dslam.id = d.id_dslam
-						LEFT JOIN street ON id_ul = street.id
-						LEFT JOIN np ON id_np = np.id
-						WHERE d.id = $id");
+
+				$query = mysqli_query($connect, "SELECT *, d.id as id_ats, n.np_name as gpon_np, s.street_name as gpon_street, street.street_name as cli_street, np.np_name as cli_np
+				FROM db_ats d
+				LEFT JOIN name_dslam ON name_dslam.id = d.id_dslam
+				LEFT JOIN street ON street.id = id_ul
+				LEFT JOIN np ON np.id = id_np
+				LEFT JOIN gpon ON gpon.id = id_gpon
+				LEFT JOIN np n ON n.id = id_gpon_np
+				LEFT JOIN street s ON s.id = id_gpon_street
+				WHERE d.id = $id");
+
 				$row = mysqli_fetch_assoc($query);
 
 				$access = mysqli_fetch_assoc(mysqli_query($connect, "SELECT `user_name` FROM users WHERE id = '$userid'"));
@@ -368,11 +394,16 @@ function saltGenerator($n = 3)
 					}
 
 					$int = "крос: $row[cross_data]<br>плата: $row[name_dslam]<br>порт:$row[port_number]";
-				} else {
-					$int = '';
 				}
 
-
+				if ($row["id_gpon"]) {
+					if ($row["gpon_building_korpus"]) {
+						$gpon_building = $row["gpon_building_number"] . "/" . $row["gpon_building_korpus"];
+					} else {
+						$gpon_building = $row["gpon_building_number"];
+					}
+					$int = "локація: $row[gpon_location]<br>сплітер: $row[gpon_splitter]<br>порт на сплітері: $row[port_number]<br>port id: $row[line_data]<br>адреса сплітера: $row[gpon_np], $row[gpon_street], $gpon_building";
+				}
 
 				mysqli_query(
 					$connect,
@@ -398,7 +429,8 @@ function saltGenerator($n = 3)
 								)"
 				) or die("<br/>error in query of update data " . mysqli_error($connect));
 
-				mysqli_query($connect, "UPDATE db_ats SET
+				if ($row["id_dslam"]) {
+					mysqli_query($connect, "UPDATE db_ats SET
 							`date_edit` = '$d_edit',
 							`ppp_login` = '',
 							`tp` = '',
@@ -411,6 +443,25 @@ function saltGenerator($n = 3)
 							`port_number` = '',
 							`loc` = ''
 							WHERE id='$id'") or die("<br/>error in query of update data " . mysqli_error($connect));
+				}
+
+				if ($row["id_gpon"]) {
+					mysqli_query($connect, "UPDATE db_ats SET
+							`date_edit` = '$d_edit',
+							`ppp_login` = '',
+							`tp` = '',
+							`type_client` = '',
+							`type_connection` = '',
+							`ppp_password` = '',
+							`date_internet` = '',
+							`id_gpon` = '',
+							`line_data` = '',
+							`cross_data` = '',
+							`port_number` = '',
+							`loc` = ''
+							WHERE id='$id'") or die("<br/>error in query of update data " . mysqli_error($connect));
+				}
+
 
 
 				print "<script type=\"text/javascript\">window.location = \"client.php?id=$id\"</script>";

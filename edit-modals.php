@@ -12,6 +12,44 @@ if ($_COOKIE['user_id']) {
 	} else {
 		$date_internet = date("d.m.Y", $line["date_internet"]);
 	}
+
+
+	if ($line['id_dslam']) {
+		$tab_adsl_title = "active";
+		$tab_adsl_active = "active show";
+		$tab_gpon_title = "disabled";
+		$tab_gpon_active = "";
+		$tab_fttb_title = "disabled";
+		$tab_fttb_active = "";
+	}
+
+	if ($line['id_gpon']) {
+		$tab_adsl_title = "disabled";
+		$tab_adsl_active = "";
+		$tab_gpon_title = "active";
+		$tab_gpon_active = "active show";
+		$tab_fttb_title = "disabled";
+		$tab_fttb_active = "";
+	}
+
+	if ($line['id_fttb']) {
+		$tab_adsl_title = "disabled";
+		$tab_adsl_active = "";
+		$tab_gpon_title = "disabled";
+		$tab_gpon_active = "";
+		$tab_fttb_title = "active";
+		$tab_fttb_active = "active show";
+	}
+
+	if (!$line['id_dslam'] && !$line['id_gpon'] && !$line['id_fttb']) {
+		$tab_adsl_title = "active";
+		$tab_adsl_active = "active show";
+		$tab_gpon_title = "";
+		$tab_gpon_active = "";
+		$tab_fttb_title = "";
+		$tab_fttb_active = "";
+	}
+
 ?>
 
 	<!-- modal general edit -->
@@ -297,10 +335,6 @@ if ($_COOKIE['user_id']) {
 						</div>
 						<!-- ./location -->
 
-
-
-
-
 						<h5 class="mt-3">Інтернет</h5>
 
 						<!-- connection date, tariff -->
@@ -368,49 +402,6 @@ if ($_COOKIE['user_id']) {
 
 						</div>
 						<!-- ./login, passw -->
-
-						<?php
-
-
-
-						if ($line['id_dslam']) {
-							$tab_adsl_title = "active";
-							$tab_adsl_active = "active show";
-							$tab_gpon_title = "disabled";
-							$tab_gpon_active = "";
-							$tab_fttb_title = "disabled";
-							$tab_fttb_active = "";
-						}
-
-						if ($line['id_gpon']) {
-							$tab_adsl_title = "disabled";
-							$tab_adsl_active = "";
-							$tab_gpon_title = "active";
-							$tab_gpon_active = "active show";
-							$tab_fttb_title = "disabled";
-							$tab_fttb_active = "";
-						}
-
-						if ($line['id_fttb']) {
-							$tab_adsl_title = "disabled";
-							$tab_adsl_active = "";
-							$tab_gpon_title = "disabled";
-							$tab_gpon_active = "";
-							$tab_fttb_title = "active";
-							$tab_fttb_active = "active show";
-						}
-
-						if (!$line['id_dslam'] && !$line['id_gpon'] && !$line['id_fttb']) {
-							$tab_adsl_title = "active";
-							$tab_adsl_active = "active show";
-							$tab_gpon_title = "";
-							$tab_gpon_active = "";
-							$tab_fttb_title = "";
-							$tab_fttb_active = "";
-						}
-
-						?>
-
 
 						<ul class="nav nav-tabs" role="tablist">
 							<li class="nav-item">
@@ -552,7 +543,7 @@ if ($_COOKIE['user_id']) {
 								<!-- ./type connections adsl,vpn, etc -->
 							</div>
 
-							<!-- gon tab -->
+							<!-- gpon tab -->
 							<div class="tab-pane fade <?= $tab_gpon_active ?>" id="tabGponEdit" role="tabpanel" aria-labelledby="gponedit-tab">
 								<div class="row my-2">
 									<div class="col-sm-8">
@@ -613,6 +604,8 @@ if ($_COOKIE['user_id']) {
 									</div>
 								</div>
 							</div>
+							
+							<!-- fttb tab -->
 							<div class="tab-pane fade <?= $tab_fttb_active ?>" id="tabFttbEdit" role="tabpanel" aria-labelledby="fttbedit-tab">
 								<div class="row my-2">
 									<p>FTTB Comming soon...</p>
@@ -868,44 +861,28 @@ if ($_COOKIE['user_id']) {
 						<p>Виберіть нову локацію та порт</p>
 						<ul class="nav nav-tabs" role="tablist">
 							<li class="nav-item">
-								<a class="nav-link d-flex align-items-center active" href="#tabAdslEdit1" data-bs-toggle="tab" aria-controls="adsledit1">
+								<a class="nav-link d-flex align-items-center <?= $tab_adsl_title ?>" href="#tabAdslEdit1" data-bs-toggle="tab" aria-controls="adsledit1">
 									<i class="fa-solid fa-fax me-2"></i>
 									<span>ADSL</span>
 								</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link d-flex align-items-center" href="#tabGponEdit1" data-bs-toggle="tab" aria-controls="gponedit1">
+								<a class="nav-link d-flex align-items-center <?= $tab_gpon_title ?>" href="#tabGponEdit1" data-bs-toggle="tab" aria-controls="gponedit1">
 									<i class="fa-solid fa-house-signal me-2"></i>
 									<span>GPON</span>
 								</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link d-flex align-items-center" href="#tabFttbEdit1" data-bs-toggle="tab" aria-controls="fttbedit1">
+								<a class="nav-link d-flex align-items-center <?= $tab_fttb_title ?>" href="#tabFttbEdit1" data-bs-toggle="tab" aria-controls="fttbedit1">
 									<i class="fa-solid fa-arrow-right-to-city me-2"></i>
 									<span>FTTB</span>
 								</a>
 							</li>
 						</ul>
 
-						<?php
-						$tab_adsl_active = "active show";
-						if ($line['id_gpon']) {
-							$tab_adsl_active = "";
-							$tab_gpon_active = "active show";
-							$tab_fttb_active = "";
-						}
-
-						if ($line['id_fttb']) {
-							$tab_adsl_active = "";
-							$tab_gpon_active = "";
-							$tab_fttb_active = "active show";
-						}
-
-						?>
 						<div class="tab-content ">
+							<!-- adsl plates & ports -->
 							<div class="tab-pane fade <?= $tab_adsl_active ?>" id="tabAdslEdit1" role="tabpanel" aria-labelledby="adsledit-tab1">
-								<!-- adsl plates & ports -->
-
 								<div class="row my-2">
 									<div class="col-2">
 										<label for="select_dslam_change" class="col-form-label">Назва плати:</label>
@@ -957,22 +934,24 @@ if ($_COOKIE['user_id']) {
 									</div>
 								</div>
 								<!-- ./adsl plates & ports -->
-
-
-
-
 							</div>
-
+							<!-- ./ adsl plates & ports-->
+							
+							<!--  gpon -->
 							<div class="tab-pane fade <?= $tab_gpon_active ?>" id="tabGponEdit1" role="tabpanel" aria-labelledby="gponedit-tab1">
 								<div class="row my-2">
 									<p>GPON Comming soon...</p>
 								</div>
 							</div>
+							<!-- ./ gpon -->
+							
+							<!-- ./ fttb -->
 							<div class="tab-pane fade <?= $tab_fttb_active ?>" id="tabFttbEdit1" role="tabpanel" aria-labelledby="fttbedit-tab1">
 								<div class="row my-2">
 									<p>FTTB Comming soon...</p>
 								</div>
 							</div>
+							<!-- ./ fttb -->
 						</div>
 
 
