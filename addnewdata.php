@@ -340,7 +340,7 @@ if ($_COOKIE['user_id']) {
 												<label for="newAdslPort" class="col-form-label">Номер порта:</label>
 											</div>
 											<div class="col-3">
-												
+
 												<select id="newAdslPort" name="new_port_adsl" class="form-select">
 													<option value=""></option>
 													<?php
@@ -442,7 +442,7 @@ if ($_COOKIE['user_id']) {
 												<label for="newGponPort" class="col-form-label">Номер порта:</label>
 											</div>
 											<div class="col-3">
-												
+
 												<select id="newGponPort" name="new_port_gpon" class="form-select">
 													<option value=""></option>
 													<?php
@@ -796,16 +796,16 @@ if ($_COOKIE['user_id']) {
 	<div class="modal fade" id="addGponLoc" aria-hidden="true">
 		<div class="modal-dialog modal-lg" role="document">
 
+			<form action="admin.php?mode=18&groupid=<?= $group_id ?>" method="POST">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title">Додавання GPON-локації</h5>
+						<button type="button" class="btn btn-close" data-bs-dismiss="modal" aria-label="Close">
 
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title">Додавання GPON-локації</h5>
-					<button type="button" class="btn btn-close" data-bs-dismiss="modal" aria-label="Close">
+						</button>
+					</div>
+					<div class="modal-body">
 
-					</button>
-				</div>
-				<div class="modal-body">
-					<form action="admin.php?mode=18&groupid=<?= $group_id ?>" method="POST">
 						<div class="row mb-2">
 							<div class="col-sm-2">
 								<label for="newGponLoc" class="col-form-label">Локація:</label>
@@ -907,7 +907,7 @@ if ($_COOKIE['user_id']) {
 										<label for="newGponBuldingKorpus" class="col-form-label">Корп.</label>
 									</div>
 									<div class="col-sm-3">
-										<input id="newGponBuldingKorpus" class="form-control" type=text value="" name="new_gpon_bulding_korpus" required>
+										<input id="newGponBuldingKorpus" class="form-control" type=text value="" name="new_gpon_bulding_korpus">
 									</div>
 								</div>
 							</div>
@@ -917,18 +917,19 @@ if ($_COOKIE['user_id']) {
 
 
 
-					</form>
+
+
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Відміна</button>
+
+						<button class="btn btn-primary" type="submit">Додати</button>
+					</div>
+
+
 
 				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Відміна</button>
-
-					<button class="btn btn-primary" type="submit">Додати</button>
-				</div>
-
-
-
-			</div>
+			</form>
 		</div>
 	</div>
 	<!-- ./add gpon loc -->

@@ -344,9 +344,9 @@ $err_msg = "<div class=\"error__message error__message--with-icon\"><i class=\"i
 
 					$ports = mysqli_num_rows(mysqli_query($connect, "SELECT id_gpon FROM db_ats WHERE id_gpon = '$am[g_id]'"));
 				?>
-					
 
-					<div class="row row-stripped py-2" style="cursor:pointer" onclick="javascript:document.location.href='info.php?m=7&gpon=<?= $am['g_id'] ?>'">
+
+					<div class="row row-stripped py-2" data-settlement-id="<?= $am["id_gpon_np"] ?>" style="cursor:pointer" onclick="javascript:document.location.href='info.php?m=7&gpon=<?= $am['g_id'] ?>'">
 						<div class="col-sm-3 d-flex align-items-center">
 							<?php
 
@@ -361,8 +361,8 @@ $err_msg = "<div class=\"error__message error__message--with-icon\"><i class=\"i
 
 
 							?></div>
-						<div class="col-sm-4 d-flex align-items-center"><?= $am["gpon_location"] ?></div>
-						<div class="col-sm-4 d-flex align-items-center"><?= $am["gpon_splitter"] ?></div>
+						<div class="col-sm-4 d-flex align-items-center text-break text-wrap"><?= $am["gpon_location"] ?></div>
+						<div class="col-sm-4 d-flex align-items-center text-break text-wrap"><?= $am["gpon_splitter"] ?></div>
 						<div class="col-sm-1 d-flex align-items-center"><span data-tooltip="tooltip" data-bs-placement="bottom" title="зайнято / всього"><?= $ports . " / " . $am["gpon_slitter_ports"] ?></span></div>
 
 					</div>
@@ -389,9 +389,7 @@ $err_msg = "<div class=\"error__message error__message--with-icon\"><i class=\"i
 					<div class="d-flex algn-items-center justify-content-between">
 						<h4>Локація: <?php echo $q1["gpon_location"] ?><br />сплітер: <?php echo $q1["gpon_splitter"] ?></h4>
 						<div class="d-flex align-items-center">
-							<a href="" data-bs-toggle="modal" data-bs-target="#edit-gpon" class="<?php if ($ports == 0) {
-																															echo 'me-2';
-																														} ?>">
+							<a href="" data-bs-toggle="modal" data-bs-target="#edit-gpon" class="<?php if ($ports == 0) { echo 'me-2'; } ?>">
 								<div data-tooltip="tooltip" data-bs-placement="bottom" title="Редагувати">
 									<i class="fa-solid fa-pen-to-square fs-4"></i>
 								</div>
