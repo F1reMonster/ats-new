@@ -1,9 +1,9 @@
 <div class="block block__search">
 
-	<form class="search-form__form" action="index.php" method="GET">
+	<form class="search-form__form" action="index.php" method="GET" autocomplete="off">
 		<div class="search-form__input">
-			<input class="form-control" type="search" name="search" placeholder="Текст для пошуку" aria-label="Search">
-			<button class="btn btn-primary d-flex align-items-center" type="submit"><i class="fa-solid fa-magnifying-glass me-1"></i><span>Пошук</span></button>
+			<input class="form-control" type="search" name="search" placeholder="Текст для пошуку" aria-label="Search" >
+			<button class="btn btn-primary d-flex align-items-center search-btn" type="submit"><i class="fa-solid fa-magnifying-glass me-lg-1"></i><span>Пошук</span></button>
 		</div>
 		<div class="search-form__radio">
 			<div class="search-form__radio-item">

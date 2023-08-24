@@ -30,7 +30,9 @@ if ($group_id == 5) $namegroup = "<span class=\"text-warning\">ЦОА</span>";
 					</svg>
 				</div>
 
-				<?= $sitename . " " . $version ?>
+				<div class="header__logo-sitename">
+					<?= $sitename . " " . $version ?>
+				</div>
 			</a>
 			<?php
 			// таймер відображення що версія нова -> тривалість 30 днів
@@ -55,8 +57,9 @@ if ($group_id == 5) $namegroup = "<span class=\"text-warning\">ЦОА</span>";
 			<div class="header__menu">
 
 				<div class="header__menu-item dropdown">
-					<a class="nav-link dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-						Довідники
+					<a class="nav-link dropdown-toggle header__menu-item--directory" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+						<span>Довідники</span>
+						<i class="fa-solid fa-folder"></i>
 					</a>
 					<ul class="dropdown-menu">
 						<li>
@@ -124,7 +127,7 @@ if ($group_id == 5) $namegroup = "<span class=\"text-warning\">ЦОА</span>";
 					<div class="user__menu dropdown">
 						<a class="nav-link dropdown-toggle user__link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 							<i class="fa-regular fa-user"></i>
-							<div class="user__name"><?= $username ?> / <?= $namegroup ?></div>
+							<div class="user__name"><?= $username ?> <span class="user__role">/ <?= $namegroup ?></span></div>
 						</a>
 						<ul class="dropdown-menu">
 							<?php if ($group_id == 4 || $group_id == 5) {
@@ -227,7 +230,10 @@ if ($group_id == 5) $namegroup = "<span class=\"text-warning\">ЦОА</span>";
 					<div class="user__btn">
 						<form action="index.php" method="POST">
 							<input type="text" name="logout" value="1" hidden>
-							<button class="btn btn-outline-primary" type="submit">Вихід</button>
+							<button class="btn btn-outline-primary user__btn-exit" type="submit">
+								<span>Вихід</span>
+								<i class="fa-solid fa-arrow-right-from-bracket"></i>
+							</button>
 						</form>
 					</div>
 
