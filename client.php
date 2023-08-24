@@ -536,12 +536,15 @@ if ($_COOKIE['user_id']) {
 						if (mysqli_num_rows($history_query) !== 0) {
 						?>
 
-							<div class="row">
-								<div class="client__head-title col-md-12">
-									<h5>Історія</h5>
-								</div>
 
+							<div class="client__history-title">
+								<div class="row">
+									<div class="client__head-title col-md-12">
+										<h5>Історія</h5>
+									</div>
+								</div>
 							</div>
+
 
 							<div class="client__head-row client__head-row--primary client__head-row--history row">
 								<div class="client__head-title col-md-1">
@@ -558,6 +561,9 @@ if ($_COOKIE['user_id']) {
 								</div>
 								<div class="client__head-title col-md-2">
 									<h5>Виконав</h5>
+								</div>
+								<div class="client__head-title-mobile">
+									<h5>Історія</h5>
 								</div>
 
 							</div>

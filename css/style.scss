@@ -397,6 +397,12 @@ h5 {
 		}
 	}
 
+	&__history-title {
+		@media (max-width: 1023px) {
+			display: none;
+		}
+	}
+
 	&__history-col {
 		display: flex;
 		align-items: center;

@@ -311,6 +311,11 @@ h5 {
 .client__row-data--login {
   word-break: break-all;
 }
+@media (max-width: 1023px) {
+  .client__history-title {
+    display: none;
+  }
+}
 .client__history-col {
   display: flex;
   align-items: center;
