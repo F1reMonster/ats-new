@@ -1,7 +1,7 @@
 <?php
 session_start();
-require_once('config.php');
-require_once('head.php');
+require_once 'config.php';
+require_once 'head.php';
 ?>
 <div class="body-wrapper">
 	<div class="container">
@@ -19,7 +19,10 @@ require_once('head.php');
 		}
 
 		if ($_POST) {
-			$login = $_POST['login'];
+			$login = trim($_POST['login']);
+			$login = stripslashes( $login );
+			$login = htmlspecialchars( $login );
+			$login = mysqli_real_escape_string( $connect, $login );
 
 			$auth = mysqli_query($connect, "SELECT salt FROM users WHERE `login` = '$login' LIMIT 1");
 

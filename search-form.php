@@ -2,8 +2,9 @@
 
 	<form class="search-form__form" action="index.php" method="GET" autocomplete="off">
 		<div class="search-form__input">
-			<input class="form-control" type="search" name="search" placeholder="Текст для пошуку" aria-label="Search" >
-			<button class="btn btn-primary d-flex align-items-center search-btn" type="submit"><i class="fa-solid fa-magnifying-glass me-lg-1"></i><span>Пошук</span></button>
+			<input class="form-control" type="search" name="search" placeholder="Текст для пошуку" aria-label="Search">
+			<button class="btn btn-primary d-flex align-items-center search-btn" type="submit"><i
+					class="fa-solid fa-magnifying-glass me-lg-1"></i><span>Пошук</span></button>
 		</div>
 		<div class="search-form__radio">
 			<div class="search-form__radio-item">
@@ -40,6 +41,8 @@
 
 $orderby = $_GET['orderby'];
 $search = $_GET['search'];
+$search = mysqli_real_escape_string( $connect, $search );
+
 $what = $_GET['what'];
 
 $table_head = "
@@ -55,9 +58,9 @@ $table_head = "
 $table_title = "Останні дії:";
 
 
-if ($search) {
+if ( $search ) {
 
-	switch ($what) {
+	switch ( $what ) {
 		case 0:
 			$search_type = "phone";
 			$order = "phone";
@@ -79,32 +82,32 @@ if ($search) {
 			$order = "phone";
 	}
 
-	if ($search) {
+	if ( $search ) {
 
-		$query = mysqli_query($connect, "SELECT *, d.id as id_ats 
+		$query = mysqli_query( $connect, "SELECT *, d.id as id_ats 
 													FROM db_ats d
 													LEFT JOIN name_dslam ON name_dslam.id = d.id_dslam
 													LEFT JOIN street ON street.id = id_ul
 													LEFT JOIN np ON np.id = id_np
 													LEFT JOIN gpon ON gpon.id = d.id_gpon
 													WHERE $search_type LIKE '%$search%'
-													ORDER BY $order");
+													ORDER BY $order" );
 
-		$how_searched = mysqli_num_rows(mysqli_query($connect, " SELECT *, d.id as id_ats 
+		$how_searched = mysqli_num_rows( mysqli_query( $connect, " SELECT *, d.id as id_ats 
 																					FROM db_ats d
 																					LEFT JOIN name_dslam ON name_dslam.id = d.id_dslam
 																					LEFT JOIN street ON street.id = id_ul
 																					LEFT JOIN np ON np.id = id_np
 																					LEFT JOIN gpon ON gpon.id = d.id_gpon
 																					WHERE $search_type LIKE '%$search%'
-																					ORDER BY $order"));
+																					ORDER BY $order" ) );
 
-		if ($how_searched == 1) {
-			$line = mysqli_fetch_assoc($query);
+		if ( $how_searched == 1 ) {
+			$line = mysqli_fetch_assoc( $query );
 			print "<script type=\"text/javascript\">window.location = \"client.php?id=$line[id_ats]\"</script>";
 		}
 
-		if ($how_searched != 0) {
+		if ( $how_searched != 0 ) {
 			$display_mess = "Пошуковий запит: <nobr style=\"color: red;\"><b>" . $search . "</b></nobr> • результатів: <nobr style=\"color: red;\"><b>" . $how_searched . "</b></nobr>";
 			$table_head = "
 				<thead class=\"table__thead--primary\">
@@ -115,33 +118,33 @@ if ($search) {
 						<th class=\"table__thead-loacation col-4\" scope=\"col\">Адреса</th>
 					</tr>
 				</thead>";
-			$table_title ="";
+			$table_title = "";
 		} else {
 			$display_mess = "Пошуковий запит: <nobr style=\"color: red;\"><b>" . $search . "</b></nobr> • результатів: <nobr style=\"color: red;\"><b>" . $how_searched . "</b></nobr>";
 			$display_mess2 = "На жаль, по Вашому запиту нічого не знайдено...";
 			$table_head = "";
-			$table_title ="";
+			$table_title = "";
 		}
 	} else {
 
-		$query = mysqli_query($connect, "SELECT *, d.id as id_ats 
+		$query = mysqli_query( $connect, "SELECT *, d.id as id_ats 
 		FROM db_ats d
 		LEFT JOIN name_dslam ON name_dslam.id = d.id_dslam
-		WHERE id = 100000000");
+		WHERE id = 100000000" );
 
-		$how_searched = mysqli_num_rows(mysqli_query($connect, "SELECT *, d.id as id_ats 
+		$how_searched = mysqli_num_rows( mysqli_query( $connect, "SELECT *, d.id as id_ats 
 		FROM db_ats d
 		LEFT JOIN name_dslam ON name_dslam.id = d.id_dslam
-		WHERE id = 100000000"));
+		WHERE id = 100000000" ) );
 
 		$display_mess = "Пошуковий запит: <nobr style=\"color: red;\"><b>" . $search . "</b></nobr> • результатів: <nobr style=\"color: red;\"><b>" . $how_searched . "</b></nobr>";
 		$display_mess2 = "На жаль, по Вашому запиту нічого не знайдено...";
 		$table_head = "";
-		$table_title ="";
+		$table_title = "";
 	}
 }
 
-if ($search) {
+if ( $search ) {
 	print $display_mess . "<br>" . $display_mess2;
 }
 

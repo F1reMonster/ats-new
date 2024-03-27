@@ -27,7 +27,7 @@
 	<link rel="stylesheet" href="css/font-awesome-v6/css/all.min.css">
 	
 
-	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/style.css?v=202308241916">
 </head>
 
 <body>
